@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  ngninx:
+    build: requirements/nginx
+    ports:
+      - '80:80'

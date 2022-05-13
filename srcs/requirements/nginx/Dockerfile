@@ -19,4 +19,6 @@ RUN apk update \
 
 # lancer script pour parametrer ssl etc
 
-COPY /Dockerfile/conf /
+COPY /conf /etc/nginx
+
+CMD ["nginx" ; "-g" ; "daemon off"]
