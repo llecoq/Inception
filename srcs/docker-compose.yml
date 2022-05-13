@@ -5,3 +5,5 @@ services:
     build: requirements/nginx
     ports:
       - '80:80'
+    tty: true  # docker run -t
+    stdin_open: true # docker run -i
