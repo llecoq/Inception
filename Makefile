@@ -10,3 +10,21 @@
 #                                                                              #
 # **************************************************************************** #
 
+all:
+	docker compose -f srcs/docker-compose.yml up -d
+
+stop:
+	docker compose -f srcs/docker-compose.yml down
+
+clean: stop
+	docker system prune -a
+
+fclean: stop
+	docker system prune -f
+
+re: clean all
+
+sh_nginx: all
+	docker exec -it -t srcs-nginx-1 sh
+
+.PHONY:	all stop clean fclean re sh_nginx

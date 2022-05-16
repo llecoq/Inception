@@ -10,4 +10,3 @@ RUN apk update \
 COPY /conf /etc/nginx
 
 CMD ["nginx", "-g", "daemon off;"]
-# CMD [ "sh" ]
