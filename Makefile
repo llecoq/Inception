@@ -17,10 +17,10 @@ stop:
 	docker compose -f srcs/docker-compose.yml down
 
 clean: stop
-	docker system prune -a
+	docker system prune
 
 fclean: stop
-	docker system prune -f
+	docker system prune -a -f
 
 re: clean all
 
