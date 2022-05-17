@@ -11,20 +11,23 @@
 # **************************************************************************** #
 
 all:
-	docker compose -f srcs/docker-compose.yml up -d
+	sudo docker compose -f srcs/docker-compose.yml up -d
+
+attached:
+	sudo docker compose -f srcs/docker-compose.yml up
 
 stop:
-	docker compose -f srcs/docker-compose.yml down
+	sudo docker compose -f srcs/docker-compose.yml down
 
 clean: stop
-	docker system prune
+	sudo docker system prune
 
 fclean: stop
-	docker system prune -a -f
+	sudo docker system prune -a -f
 
-re: clean all
+re: fclean all
 
 sh_nginx: all
-	docker exec -it -t srcs-nginx-1 sh
+	sudo docker exec -it srcs-nginx-1 sh
 
-.PHONY:	all stop clean fclean re sh_nginx
+.PHONY:	all stop clean fclean re sh_nginx attached
