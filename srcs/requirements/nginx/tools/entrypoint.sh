@@ -15,7 +15,7 @@ email=llecoq@student.42lyon.fr
 # Optional
 # password=mypassword
 
-# For this project self-signed certificate is required but it is less secured
+# For this project self-signed certificate is required but it is not recommended in production
 
 # Generate self-signed certificate that is valid only 1 day everytime the server is launched
 openssl req -newkey rsa:2048 -x509 -sha256 -days 1 -nodes \
