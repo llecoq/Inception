@@ -17,8 +17,9 @@ email=llecoq@student.42lyon.fr
 
 # For this project self-signed certificate is required but it is not recommended in production
 
-# Generate self-signed certificate that is valid only 1 day everytime the server is launched
-openssl req -newkey rsa:2048 -x509 -sha256 -days 1 -nodes \
+# Generate self-signed certificate that is valid only 7 days everytime the server is launched
+mkdir /etc/ssl/private
+openssl req -newkey rsa:2048 -x509 -sha256 -days 7 -nodes \
 	-keyout /etc/ssl/private/$domain.key \
 	-out /etc/ssl/certs/$domain.crt \
 	-subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"

@@ -1,9 +1,8 @@
-version: '3'
+version: '2.5'
 
 services:
   nginx:
     build: requirements/nginx
     ports:
-      - '80:80'
-    tty: true  # docker run -t
-    stdin_open: true # docker run -i
+      - 443:443
+    restart: always
