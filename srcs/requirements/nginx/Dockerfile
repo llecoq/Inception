@@ -3,7 +3,6 @@ FROM alpine:3.14.6
 RUN set -ux \
 # Create user
     && adduser -D -g 'nginx' nginx \
-	&& chown -R nginx /var/run/ \
 # update and upgrade
 	&& apk update \
 	&& apk upgrade \
@@ -12,6 +11,7 @@ RUN set -ux \
 		nginx \
 		openssl \
 # set ownership and permissions as required 
+	&& chown nginx /var/run/ \
 	&& chown -R nginx /etc/ssl
 
 # run container as nginx user instead of root

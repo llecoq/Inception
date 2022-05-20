@@ -7,10 +7,10 @@ services:
       - 443:443
     restart: always
  
-  # mariadb:
-  #   build: requirements/mariadb
-  #   ports:
-  #     - 3306:3306
-  #   stdin_open: true
-  #   tty: true
-  #   # restart: always
+  mariadb:
+    build: requirements/mariadb
+    ports:
+      - 3306:3306
+    stdin_open: true
+    tty: true
+    # restart: always
