@@ -1,13 +1,28 @@
-FROM alpine:3.15.4
+FROM alpine:3.14.6
 
-RUN apk update \
+RUN set -ux \
+# Create user
+    && adduser -D -g 'nginx' nginx \
+	&& chown -R nginx /var/run/ \
+# update and upgrade
+	&& apk update \
 	&& apk upgrade \
-	&& apk add nginx \
-	&& apk add openssl 
+# install nginx and openssl
+	&& apk add --no-cache \
+		nginx \
+		openssl \
+# set ownership and permissions as required 
+	&& chown -R nginx /etc/ssl
 
+# run container as nginx user instead of root
+USER nginx
+
+# copy conf files into container
 COPY /conf /etc/nginx
-COPY /tools/entrypoint.sh /
+# copy docker-entrypoint.sh script that will be needed for configuration 
+COPY /tools/docker-entrypoint.sh /
 
-ENTRYPOINT [ "sh", "/entrypoint.sh" ]
+# launch docker-entrypoint script that will generate the self-signed ssl certificate
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
 CMD [ "nginx", "-g", "daemon off;"]
