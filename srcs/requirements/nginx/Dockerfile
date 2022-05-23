@@ -1,7 +1,7 @@
 FROM alpine:3.14.6
 
 RUN set -ux \
-# Create user
+# Create user and group that will be used to run the server via nginx.conf file
     && adduser -D -g 'nginx' nginx \
 # update and upgrade
 	&& apk update \
@@ -9,13 +9,7 @@ RUN set -ux \
 # install nginx and openssl
 	&& apk add --no-cache \
 		nginx \
-		openssl \
-# set ownership and permissions as required 
-	&& chown nginx /var/run/ \
-	&& chown -R nginx /etc/ssl
-
-# run container as nginx user instead of root
-USER nginx
+		openssl
 
 # copy conf files into container
 COPY /conf /etc/nginx
