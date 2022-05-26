@@ -6,6 +6,10 @@ RUN set -ux \
 # update and upgrade / same as "apk -U upgrade"
 	&& apk update \
 	&& apk upgrade \
+# install php and php-fpm
+	&& apk add --no-cache \
+		php7 \
+		php7-fpm \
 # install wordpress
 	&& mkdir -m 0751 -p /usr/share/webapps/ \
 	&& cd /usr/share/webapps/ \
