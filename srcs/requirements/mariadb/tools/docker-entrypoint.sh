@@ -1,7 +1,8 @@
 #!/bin/sh
 set -ex
 
-# set up new database if it doesn't already exist in the shared volume
+# set up and run new database if it doesn't already exist in the shared volume
+# else start server via Dockerfile CMD
 if [ ! -d /var/lib/mysql/${DB_NAME} ];
 	then
 		# install/initialize MySQL database / equivalent of /etc/init.d/mariadb setup
@@ -22,6 +23,6 @@ if [ ! -d /var/lib/mysql/${DB_NAME} ];
 		GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USERNAME}'@'localhost' IDENTIFIED BY '${DB_USER_PASSWORD}';
 		FLUSH PRIVILEGES;
 _EOF_
+	else
+		exec "$@"
 fi
-
-exec "$@"
