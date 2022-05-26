@@ -10,11 +10,10 @@ RUN set -ux \
 	&& apk add --no-cache \
 		mariadb \
 		mariadb-client \
-# remove cache form update
+# remove cache from update
 	&& rm /var/cache/apk/* \
 # set ownership and permissions as required
-	&& mkdir /var/lib/mysql \
-	&& chmod 0751 /var/lib/mysql \
+	&& mkdir -m 0751 -p /var/lib/mysql \
 	&& chown -R mysql /var/lib/mysql
 
 COPY /tools/docker-entrypoint.sh /

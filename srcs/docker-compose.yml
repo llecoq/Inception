@@ -18,10 +18,21 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - /home/llecoq/data:/var/lib/mysql
+      - /home/llecoq/data/DB:/var/lib/mysql
     restart: always
-    # stdin_open: true
-    # tty: true
+
+  wordpress:
+    build: requirements/wordpress
+    container_name: wordpress
+    env_file:
+      - .env
+    ports:
+      - 9000:9000
+    stdin_open: true
+    tty: true
+    volumes:
+      - /home/llecoq/data/wordpress:/usr/share/webapps/wordpress/
+    restart: always
 
 # volumes:
 #   db-data: 
