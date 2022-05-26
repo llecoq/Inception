@@ -3,18 +3,25 @@ version: '2.5'
 services:
   nginx:
     build: requirements/nginx
-    ports:
-      - 443:443    
+    container_name: nginx
     env_file:
       - .env
+    ports:
+      - 443:443
     restart: always
  
   mariadb:
     build: requirements/mariadb
-    ports:
-      - 3306:3306
+    container_name: mariadb
     env_file:
       - .env
+    ports:
+      - 3306:3306
+    volumes:
+      - /home/llecoq/data:/var/lib/mysql
     restart: always
     # stdin_open: true
     # tty: true
+
+# volumes:
+#   db-data: 

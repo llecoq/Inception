@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 all:
-	sudo docker compose -f srcs/docker-compose.yml up -d --build
+	sudo docker compose -f srcs/docker-compose.yml up --build
 # sudo docker compose -f srcs/docker-compose.yml up --build
 
 stop:
@@ -26,9 +26,9 @@ fclean: stop
 re: fclean all
 
 sh_nginx: all
-	sudo docker exec -it srcs-nginx-1 sh
+	sudo docker exec -it nginx sh
 
 sh_mariadb: all
-	sudo docker exec -it srcs-mariadb-1 sh
+	sudo docker exec -it mariadb sh
 
 .PHONY:	all stop clean fclean re sh_nginx sh_mariadb

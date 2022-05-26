@@ -1,7 +1,7 @@
 #!/bin/sh
 set -ex
 
-# 
+# set up new database if it doesn't already exist in the shared volume
 if [ ! -d /var/lib/mysql/${DB_NAME} ];
 	then
 		# install/initialize MySQL database / equivalent of /etc/init.d/mariadb setup
@@ -11,6 +11,7 @@ if [ ! -d /var/lib/mysql/${DB_NAME} ];
 		# secure installation of mariadb / same steps as mariadb-secure-installation script :
 		# set database root password, delete anonymous user, ensure the root user can not log in remotely,
 		# remove the test database and flush the privileges tables.
+		# Creating new database and granting privileges to the DB user;
 		mysql --user=root <<_EOF_
 		ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASSWORD}';
 		DELETE FROM mysql.user WHERE User='';
