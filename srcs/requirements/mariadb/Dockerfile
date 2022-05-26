@@ -20,6 +20,7 @@ RUN set -ux \
 COPY /tools/docker-entrypoint.sh /
 
 # launch docker-entrypoint script that will start and configure the mariadb server
-# ENTRYPOINT [ "/docker-entrypoint.sh" ]
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
-# CMD ["/usr/bin/mysqld_safe"]
+# MySQL Server Startup Script with safety features
+CMD ["/usr/bin/mysqld_safe"]
