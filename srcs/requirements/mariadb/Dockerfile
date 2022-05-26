@@ -1,24 +1,25 @@
 FROM alpine:3.14.6
 
 RUN set -ux \
-# Create user
+# Create user and group that will be used to run the mariadb server
     && adduser -D -g 'mysql' mysql \
-# update and upgrade
+# update and upgrade / same as "apk -U upgrade"
 	&& apk update \
 	&& apk upgrade \
-# install mariadb
+# install mariadb and its client
 	&& apk add --no-cache \
 		mariadb \
-		mariadb-client 
-# set ownership and permissions as required 
-	# && mkdir /var/lib/mysql \
-	# && chown -R mysql /var/lib/mysql
-
-# run container as mysql user instead of root
-# USER mysql
+		mariadb-client \
+# remove cache form update
+	&& rm /var/cache/apk/* \
+# set ownership and permissions as required
+	&& mkdir /var/lib/mysql \
+	&& chmod 0751 /var/lib/mysql \
+	&& chown -R mysql /var/lib/mysql
 
 COPY /tools/docker-entrypoint.sh /
 
-# ENTRYPOINT [ "/bin/sh", "/docker-entrypoint.sh" ]
+# launch docker-entrypoint script that will start and configure the mariadb server
+# ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
-# CMD ["mysqld"]
+# CMD ["/usr/bin/mysqld_safe"]
