@@ -21,3 +21,11 @@ RUN set -ux \
 	&& rm wordpress-6.0.tar.gz \
 	&& rm /var/cache/apk/*
 
+# copy docker-entrypoint.sh script that will be needed for configuration 
+COPY /tools/docker-entrypoint.sh /
+
+# launch docker-entrypoint script that configure WordPress
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
+
+# tell nginx to stay in the foreground
+# CMD [ "nginx", "-g", "daemon off;"]

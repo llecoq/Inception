@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 all: volume
-	sudo docker compose -p inception -f srcs/docker-compose.yml up --build
+	sudo docker compose -p inception -f srcs/docker-compose.yml up -d --build
 
 stop:
 	sudo docker compose -f srcs/docker-compose.yml down
