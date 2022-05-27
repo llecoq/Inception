@@ -23,6 +23,6 @@ if [ ! -d /var/lib/mysql/${DB_NAME} ];
 		GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USERNAME}'@'localhost' IDENTIFIED BY '${DB_USER_PASSWORD}';
 		FLUSH PRIVILEGES;
 _EOF_
-	else
-		exec "$@"
+else
+	exec "$@"
 fi

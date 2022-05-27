@@ -21,7 +21,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - /home/llecoq/data/DB:/var/lib/mysql
+      - DB:/var/lib/mysql
     networks:
       - inception
     restart: always
@@ -38,11 +38,24 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - /home/llecoq/data/wordpress:/usr/share/webapps/wordpress/
+      - WordPress:/usr/share/webapps/wordpress/
     restart: always
 
 networks:
   inception:
+    driver: bridge
+    name: inception
 
-# volumes:
-#   db-data: 
+volumes:
+  DB:
+    name: DB
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/llecoq/data/DB
+  WordPress:
+    name: WordPress
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/llecoq/data/WordPress

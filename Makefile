@@ -10,8 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-all:
-	sudo docker compose -f srcs/docker-compose.yml up -d --build
+all: volume
+	sudo docker compose -p inception -f srcs/docker-compose.yml up --build
 
 stop:
 	sudo docker compose -f srcs/docker-compose.yml down
@@ -29,5 +29,13 @@ sh_nginx: all
 
 sh_mariadb: all
 	sudo docker exec -it mariadb sh
+
+volume: ~/data/DB ~/data/WordPress
+
+~/data/DB:
+	mkdir -p ~/data/DB
+
+~/data/WordPress:
+	mkdir -p ~/data/WordPress
 
 .PHONY:	all stop clean fclean re sh_nginx sh_mariadb
