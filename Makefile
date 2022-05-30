@@ -10,16 +10,21 @@
 #                                                                              #
 # **************************************************************************** #
 
+CONTAINERS = nginx mariadb wordpress
+
 all: volume
-	sudo docker compose -p inception -f srcs/docker-compose.yml up -d --build
+	sudo docker compose -p inception -f srcs/docker-compose.yml up --build
 
 stop:
+	sudo docker stop $(CONTAINERS)
+
+down: stop
 	sudo docker compose -f srcs/docker-compose.yml down
 
-clean: stop
+clean: down
 	sudo docker system prune
 
-fclean: stop
+fclean: down
 	sudo docker system prune -a -f
 
 re: fclean all

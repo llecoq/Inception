@@ -9,6 +9,8 @@ services:
       - .env
     ports:
       - 443:443
+    volumes:
+      - WordPress:/var/www/html/
     networks:
       - inception
     restart: always
@@ -38,7 +40,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - WordPress:/usr/share/webapps/wordpress/
+      - WordPress:/var/www/html/
     restart: always
 
 networks:

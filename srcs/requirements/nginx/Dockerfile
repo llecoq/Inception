@@ -10,6 +10,9 @@ RUN set -ux \
 	&& apk add --no-cache \
 		nginx \
 		openssl \
+# set ownership and permissions as required
+	&& mkdir -m 0751 -p /etc/nginx/sites-enabled \
+	&& chown -R nginx /etc/nginx/ \
 # remove cache from update
 	&& rm /var/cache/apk/*
 
