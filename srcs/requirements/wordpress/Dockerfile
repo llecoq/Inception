@@ -25,6 +25,7 @@ RUN set -ux \
 	&& rm wordpress-6.0.tar.gz \
 	&& rm /var/cache/apk/*
 
+COPY /conf/wp-config.php /var/www/html/
 COPY /conf/www.conf /etc/php8/php-fpm.d/
 # copy docker-entrypoint.sh script that will be needed for configuration 
 COPY /tools/docker-entrypoint.sh /

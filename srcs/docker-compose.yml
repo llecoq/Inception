@@ -43,6 +43,8 @@ services:
     tty: true
     volumes:
       - WordPress:/var/www/html
+    depends_on:
+      - mariadb
     restart: always
 
 networks:
@@ -59,7 +61,7 @@ volumes:
       device: /home/llecoq/data/DB/
   WordPress:
     name: WordPress
-    driver_opts:
+    driver_opts: 
       type: none
       o: bind
       device: /home/llecoq/data/WordPress/

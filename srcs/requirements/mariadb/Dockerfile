@@ -18,6 +18,8 @@ RUN set -ux \
 
 COPY /tools/docker-entrypoint.sh /
 
+# COPY /conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
+
 # launch docker-entrypoint script that will set up the database and start the mariadb daemon
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
