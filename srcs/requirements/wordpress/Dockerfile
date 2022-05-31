@@ -10,8 +10,9 @@ RUN set -ux \
 	&& apk upgrade \
 # install php and php-fpm
 	&& apk add --no-cache \
-		php7 \
-		php7-fpm \
+		php8 \
+		php8-fpm \
+		php8-mysqli \
 # install wordpress
 	&& mkdir -m 0755 -p /var/www/html/ \
 	&& cd /var/www/html/ \
@@ -19,17 +20,17 @@ RUN set -ux \
 	&& tar --strip-components=1 -zxf wordpress-6.0.tar.gz \
 # set ownership and permissions as required
 	&& chown -R wordpress:wordpress /var/www/* \
-	&& chown -R wordpress:wordpress /var/lib/php7 \
+	&& chown -R wordpress:wordpress /var/lib/php8 \
 # remove cache and wordpress archive
 	&& rm wordpress-6.0.tar.gz \
 	&& rm /var/cache/apk/*
 
-COPY /conf/www.conf /etc/php7/php-fpm.d/
+COPY /conf/www.conf /etc/php8/php-fpm.d/
 # copy docker-entrypoint.sh script that will be needed for configuration 
 COPY /tools/docker-entrypoint.sh /
 
 # launch docker-entrypoint script that configure WordPress
-ENTRYPOINT [ "php-fpm7", "--nodaemonize" ]
+ENTRYPOINT [ "php-fpm8", "--nodaemonize" ]
 
 # force FastCGI Process Manager to stay in foreground, and ignore daemonize option from config file
 # CMD [ "php-fpm7", "--nodaemonize" ]
