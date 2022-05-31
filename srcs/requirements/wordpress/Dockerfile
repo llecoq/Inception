@@ -1,5 +1,7 @@
 FROM alpine:3.14.6
 
+ENV DOMAIN_NAME "llecoq.42.fr"
+
 RUN set -ux \
 # Create user and group that will be used to run the mariadb server
     && adduser -D -g 'wordpress' wordpress \
@@ -11,16 +13,18 @@ RUN set -ux \
 		php7 \
 		php7-fpm \
 # install wordpress
-	&& mkdir -m 0751 -p /var/www/html/ \
+	&& mkdir -m 0755 -p /var/www/html/ \
 	&& cd /var/www/html/ \
 	&& wget https://wordpress.org/wordpress-6.0.tar.gz \
-	&& tar -xzvf wordpress-6.0.tar.gz \
+	&& tar --strip-components=1 -zxf wordpress-6.0.tar.gz \
 # set ownership and permissions as required
-	&& chown -R wordpress /var/www/html/ \
+	&& chown -R wordpress:wordpress /var/www/* \
+	&& chown -R wordpress:wordpress /var/lib/php7 \
 # remove cache and wordpress archive
 	&& rm wordpress-6.0.tar.gz \
 	&& rm /var/cache/apk/*
 
+COPY /conf/www.conf /etc/php7/php-fpm.d/
 # copy docker-entrypoint.sh script that will be needed for configuration 
 COPY /tools/docker-entrypoint.sh /
 

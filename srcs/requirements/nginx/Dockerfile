@@ -1,5 +1,7 @@
 FROM alpine:3.14.6
 
+ENV DOMAIN_NAME "llecoq.42.fr"
+
 RUN set -ux \
 # Create user and group that will be used to run the server via nginx.conf file
     && adduser -D -g 'nginx' nginx \
@@ -10,9 +12,11 @@ RUN set -ux \
 	&& apk add --no-cache \
 		nginx \
 		openssl \
-# set ownership and permissions as required
-	&& mkdir -m 0751 -p /etc/nginx/sites-enabled \
-	&& chown -R nginx /etc/nginx/ \
+# set directories, ownership and permissions as required
+	&& mkdir -m 0755 -p /var/www/html/ \
+	&& mkdir -m 0751 -p /etc/nginx/sites-enabled/ \
+	&& chown -R nginx:nginx /etc/nginx/ \
+	# && chown -R nginx /var/www/${DOMAIN_NAME}/public_html/ \
 # remove cache from update
 	&& rm /var/cache/apk/*
 

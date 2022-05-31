@@ -9,10 +9,12 @@ services:
       - .env
     ports:
       - 443:443
-    volumes:
-      - WordPress:/var/www/html/
     networks:
       - inception
+    volumes:
+      - WordPress:/var/www/html
+    depends_on:
+      - wordpress
     restart: always
  
   mariadb:
@@ -22,10 +24,10 @@ services:
       - .env
     ports:
       - 3306:3306
-    volumes:
-      - DB:/var/lib/mysql
     networks:
       - inception
+    volumes:
+      - DB:/var/lib/mysql
     restart: always
 
   wordpress:
@@ -40,7 +42,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - WordPress:/var/www/html/
+      - WordPress:/var/www/html
     restart: always
 
 networks:
@@ -54,10 +56,10 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/llecoq/data/DB
+      device: /home/llecoq/data/DB/
   WordPress:
     name: WordPress
     driver_opts:
       type: none
       o: bind
-      device: /home/llecoq/data/WordPress
+      device: /home/llecoq/data/WordPress/
