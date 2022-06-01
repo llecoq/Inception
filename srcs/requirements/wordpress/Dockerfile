@@ -1,7 +1,5 @@
 FROM alpine:3.14.6
 
-ENV DOMAIN_NAME "llecoq.42.fr"
-
 RUN set -ux \
 # Create user and group that will be used to run the mariadb server
     && adduser -D -g 'wordpress' wordpress \

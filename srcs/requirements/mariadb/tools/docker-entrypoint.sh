@@ -6,7 +6,7 @@ set -ex
 if [ ! -d /var/lib/mysql/${DB_NAME} ];
 	then
 		# install/initialize MySQL database / equivalent of /etc/init.d/mariadb setup
-		mysql_install_db --user=mysql --datadir=/var/lib/mysql
+		mysql_install_db --user=${DB_USER} --datadir=/var/lib/mysql
 		# start mariadb server
 		/usr/share/mariadb/mysql.server start
 		# secure installation of mariadb / same steps as mariadb-secure-installation script :

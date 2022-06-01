@@ -10,6 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
+include ./srcs/.env
+.EXPORT_ALL_VARIABLES:
+
 CONTAINERS = nginx mariadb wordpress
 
 all: volume
@@ -35,12 +38,12 @@ sh_nginx: all
 sh_mariadb: all
 	sudo docker exec -it mariadb sh
 
-volume: ~/data/DB ~/data/WordPress
+volume: /home/${LOGIN}/data/DB /home/${LOGIN}/data/WordPress
 
-~/data/DB:
-	mkdir -p ~/data/DB
+/home/${LOGIN}/data/DB:
+	mkdir -p /home/${LOGIN}/data/DB
 
-~/data/WordPress:
-	mkdir -p ~/data/WordPress
+/home/${LOGIN}/data/WordPress:
+	mkdir -p /home/${LOGIN}/data/WordPress
 
 .PHONY:	all stop clean fclean re sh_nginx sh_mariadb

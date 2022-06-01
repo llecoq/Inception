@@ -14,7 +14,7 @@ RUN set -ux \
 	&& rm /var/cache/apk/* \
 # set ownership and permissions as required
 	&& mkdir -m 0751 -p /var/lib/mysql \
-	&& chown -R mysql /var/lib/mysql
+	&& chown -R mysql:mysql /var/lib/mysql
 
 COPY /tools/docker-entrypoint.sh /
 
