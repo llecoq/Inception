@@ -1,6 +1,10 @@
 #!/bin/sh
 set -ex
 
+# Set bind-address so MySQL can bind to all networks and make sure skip-networking is off
+sed -ie 's/#bind-address/bind-address/g' /etc/my.cnf.d/mariadb-server.cnf
+sed -ie 's/skip-networking/#skip-networking/g' /etc/my.cnf.d/mariadb-server.cnf
+
 # set up and run new database if it doesn't already exist in the shared volume
 # else start server via Dockerfile CMD
 if [ ! -d /var/lib/mysql/${DB_NAME} ];
@@ -20,9 +24,10 @@ if [ ! -d /var/lib/mysql/${DB_NAME} ];
 		DROP DATABASE IF EXISTS test;
 		DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
 		CREATE DATABASE IF NOT EXISTS ${DB_NAME};
-		GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'localhost' IDENTIFIED BY '${DB_PASSWORD}';
+		GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASSWORD}';
 		FLUSH PRIVILEGES;
 _EOF_
-else
-	exec "$@"
+		mysqladmin --user=root --password=$DB_ROOT_PASSWORD shutdown
 fi
+
+exec "$@"
