@@ -29,7 +29,6 @@ COPY /tools/docker-entrypoint.sh /
 
 # launch docker-entrypoint script that configure WordPress
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
-# ENTRYPOINT [ "php-fpm8", "--nodaemonize" ]
 
 # force FastCGI Process Manager to stay in foreground, and ignore daemonize option from config file
 CMD [ "php-fpm8", "--nodaemonize" ]
