@@ -1,7 +1,7 @@
 FROM alpine:3.14.6
 
 RUN set -ux \
-# Create user and group that will be used to run the mariadb server
+# create mysql user and group 
     && adduser -D -g 'mysql' mysql \
 # update and upgrade / same as "apk -U upgrade"
 	&& apk update \

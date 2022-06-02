@@ -1,12 +1,12 @@
 FROM alpine:3.14.6
 
 RUN set -ux \
-# Create user and group that will be used to run the mariadb server
+# Create user and group that will be used in the php-fpm www.conf file
     && adduser -D -g 'wordpress' wordpress \
 # update and upgrade / same as "apk -U upgrade"
 	&& apk update \
 	&& apk upgrade \
-# install the bare minimum needed for this project (php, php-fpm and its dependencies)
+# install the bare minimum needed for this project (mariadb client, php-fpm, php and its dependencies)
 	&& apk add --no-cache \
 		php8 \
 		php8-fpm \
@@ -18,7 +18,7 @@ RUN set -ux \
 	&& ln -s /usr/bin/php8 /usr/bin/php \
 # set ownership and permissions as required
 	&& mkdir -m 0751 -p /var/www/html/ \
-	&& chown -R wordpress:wordpress /var/www/* \
+	&& chown -R wordpress:wordpress /var/www/html \
 	&& chown -R wordpress:wordpress /var/lib/php8 \
 # remove cache
 	&& rm /var/cache/apk/*
