@@ -35,5 +35,4 @@ _EOF_
 fi
 
 echo "Starting up mariadb's server..."
-
 exec "$@"

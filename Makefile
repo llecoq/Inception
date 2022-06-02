@@ -32,12 +32,6 @@ fclean: down
 
 re: fclean all
 
-sh_nginx: all
-	sudo docker exec -it nginx sh
-
-sh_mariadb: all
-	sudo docker exec -it mariadb sh
-
 volume: /home/${LOGIN}/data/DB /home/${LOGIN}/data/WordPress
 
 /home/${LOGIN}/data/DB:
@@ -46,4 +40,4 @@ volume: /home/${LOGIN}/data/DB /home/${LOGIN}/data/WordPress
 /home/${LOGIN}/data/WordPress:
 	mkdir -p /home/${LOGIN}/data/WordPress
 
-.PHONY:	all stop clean fclean re sh_nginx sh_mariadb
+.PHONY:	all stop clean fclean re

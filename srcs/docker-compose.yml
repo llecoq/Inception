@@ -10,7 +10,7 @@ services:
     ports:
       - 443:443
     networks:
-      - inception
+      - intra
     volumes:
       - WordPress:${NGINX_PATH}
     depends_on:
@@ -25,7 +25,7 @@ services:
     ports:
       - 3306:3306
     networks:
-      - inception
+      - intra
     volumes:
       - DB:/var/lib/mysql
     restart: always
@@ -38,7 +38,7 @@ services:
     ports:
       - 9000:9000
     networks:
-      - inception
+      - intra
     volumes:
       - WordPress:${WORDPRESS_PATH}
     depends_on:
@@ -46,9 +46,9 @@ services:
     restart: always
 
 networks:
-  inception:
+  intra:
     driver: bridge
-    name: inception
+    name: ${PROJECT_NAME}
 
 volumes:
   DB:
