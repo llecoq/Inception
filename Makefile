@@ -16,7 +16,7 @@ include ./srcs/.env
 CONTAINERS = nginx mariadb wordpress
 
 all: volume
-	sudo docker compose -p inception -f srcs/docker-compose.yml up --build
+	sudo docker compose -p inception -f srcs/docker-compose.yml up -d --build
 
 stop:
 	sudo docker stop $(CONTAINERS)

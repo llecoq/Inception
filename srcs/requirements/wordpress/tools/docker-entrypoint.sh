@@ -29,7 +29,8 @@ if ! wp core is-installed --path=${WORDPRESS_PATH};
 						 --dbpass=${DB_PASSWORD} \
 						 --dbhost=${DB_HOST} \
 						 --path=${WORDPRESS_PATH}
-		# create admin user
+	
+		# create WordPress tables in the database and the admin user
 		echo "Creating the WordPress tables in the database using the URL, title, and default admin user details provided..."
 		wp core install  --url=${DOMAIN_NAME} \
 						 --title=${PROJECT_NAME} \
@@ -38,6 +39,13 @@ if ! wp core is-installed --path=${WORDPRESS_PATH};
 						 --admin_email=${ADMIN_EMAIL} \
 						 --skip-email \
 						 --path=${WORDPRESS_PATH}
+		
+		# create wordpress user
+		wp user create ${WORDPRESS_USER} ${WORDPRESS_USER_EMAIL} \
+						 --user_pass=${WORDPRESS_USER_PASSWORD} \
+						 --role=${WORDPRESS_USER_ROLE} \
+						 --path=${WORDPRESS_PATH}
+
 	else
 		echo "WordPress is already installed and properly configured !"
 fi
