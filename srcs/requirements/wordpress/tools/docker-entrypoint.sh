@@ -1,13 +1,5 @@
 #!/bin/sh
 
-# download wp-cli command line tool for interacting with and managing WordPress sites.
-echo "Downloading WordPress command line tool..."
-wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-# make it an executable file and move it to the local /bin
-chmod +x wp-cli.phar
-mv wp-cli.phar /usr/local/bin/wp
-echo "... wp-cli is ready to use !"
-
 # bash script for checking whether WordPress is installed or not 
 if ! wp core is-installed --path=${WORDPRESS_PATH};
 	then

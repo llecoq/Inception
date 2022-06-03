@@ -53,12 +53,14 @@ networks:
 volumes:
   DB:
     name: DB
+    driver: local
     driver_opts:
       type: none
       o: bind
       device: /home/${LOGIN}/data/DB/
   WordPress:
     name: WordPress
+    driver: local
     driver_opts: 
       type: none
       o: bind
