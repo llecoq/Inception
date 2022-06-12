@@ -27,19 +27,27 @@
 
 This document is a System Administration related exercise.
 
+<p align="center">
+  <img src="https://github.com/llecoq/inception/blob/main/assets/config.png" alt="config inception">
+</p>
+
 You first need to have docker engine installed on your linux host machine.
 
 In the env. file, replace all the informations by the one needed and the everything will be automatized by the Makefile.
+
+<img src="https://github.com/llecoq/inception/blob/main/assets/infos.png" alt="infos inception">
 
 You will need to modify the /etc/hosts file on your hosts machine to allow redirections to your [login].42.fr address.
 ```
 sudo vim /etc/hosts
 ```
-Then, youare all set !
+<img src="https://github.com/llecoq/inception/blob/main/assets/hosts.png" alt="hosts inception">
+
+Then, you are all set ! Make and wait for the services to be up.
 ```
 make
 ```
-
+<img src="https://github.com/llecoq/inception/blob/main/assets/run.png" alt="run">
 
 ## What's included
 
