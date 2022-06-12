@@ -25,9 +25,9 @@ RUN set -ux \
 	&& ln -s /usr/bin/php8 /usr/bin/php \
 # set ownership and permissions as required
 	&& mkdir -m 0751 -p /var/www/html/ \
-	&& chown -R wordpress:wordpress /var/www/html \
-	&& chown -R wordpress:wordpress /var/lib/php8 \
-	&& chown -R wordpress:wordpress /var/log/php8 \
+	&& chown -R wordpress /var/www/html \
+	&& chown -R wordpress /var/lib/php8 \
+	&& chown -R wordpress /var/log/php8 \
 # remove cache
 	&& rm /var/cache/apk/*
 
