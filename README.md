@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://42lyon.fr/">
-    <img src="https://github.com/llecoq/inception/blob/main/assets/final%20grade.png" alt="inception" width=200 height=170>
+    <img src="./assets/final_grade.png" alt="inception" width=200>
   </a>
 
   <h2 align="center">inception</h2>
@@ -11,7 +11,7 @@
     <br>
     The images for each service are build on an alpine base for a lightweight solution.
     <br>
-    <a href="https://github.com/llecoq/finception/blob/master/assets/en.subject.pdf">English Subject </a>
+    <a href="./assets/en.subject.pdf">English Subject </a>
   </p>
 </p>
 
@@ -28,7 +28,7 @@
 This document is a System Administration related exercise.
 
 <p align="center">
-  <img src="https://github.com/llecoq/inception/blob/main/assets/config.png" alt="config inception">
+  <img src="./assets/config.png" alt="config inception">
 </p>
 
 You first need to have docker engine installed on your linux host machine.
@@ -41,13 +41,13 @@ You will need to modify the /etc/hosts file on your hosts machine to allow redir
 ```
 sudo vim /etc/hosts
 ```
-<img src="https://github.com/llecoq/inception/blob/main/assets/hosts.png" alt="hosts inception">
+<img src="./assets/hosts.png" alt="hosts inception">
 
 Then, you are all set ! Make and wait for the services to be up.
 ```
 make
 ```
-<img src="https://github.com/llecoq/inception/blob/main/assets/run.png" alt="run">
+<img src="./assets/run.png" alt="run">
 
 ## What's included
 
